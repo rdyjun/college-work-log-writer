@@ -127,7 +127,11 @@ async function clockIn() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await page.mouse.click(1600, 170, { button: "left" });
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("값을 입력해주세요\nex) 20250101 0900 1200\n");
+    console.log("값을 입력해주세요\n");
+    console.log("ex) 20250101 0900 1200\n");
+    console.log(
+      "입력이 끝나면 아무 값도 입력하지 않은 상태로 Enter를 한 번 더 눌러주세요\n"
+    );
 
     const arr = [];
 
