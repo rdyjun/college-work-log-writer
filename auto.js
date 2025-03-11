@@ -96,6 +96,22 @@ async function clockIn() {
     });
   }
 
+  function validate(data) {
+    if (data[0].length !== 8) {
+      return false;
+    }
+
+    if (data[1].length !== 4) {
+      return false;
+    }
+
+    if (data[2].length !== 4) {
+      return false;
+    }
+
+    return true;
+  }
+
   // 회사 포털 페이지로 이동
   await page.goto(
     "https://portal.dongyang.ac.kr/login_real.jsp?targetId=DOUMI&RelayState=https://dtis.dongyang.ac.kr/dtc5/"
@@ -142,6 +158,10 @@ async function clockIn() {
       }
 
       const data = input.split(" ");
+      if (!validate(data)) {
+        console.log("잘못된 값이 입력되었습니다.");
+        return;
+      }
       const date = data[0];
       const start = data[1];
       const end = data[2];
