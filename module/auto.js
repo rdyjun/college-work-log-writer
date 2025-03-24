@@ -1,10 +1,4 @@
 const puppeteer = require("puppeteer");
-const readline = require("readline");
-
-const rl = readline.createInterface({
-  input: process.stdin, // 표준 입력 (키보드)
-  output: process.stdout, // 표준 출력 (콘솔)
-});
 
 async function checkAlert(page) {
   // 알림창이 있는 경우 처리
@@ -18,7 +12,7 @@ async function checkAlert(page) {
   }
 }
 
-async function clockIn() {
+async function clockIn(id, pw, dataList) {
   // 브라우저 시작 (헤드리스 모드)
   const browser = await puppeteer.launch({
     headless: true, // 브라우저 화면을 볼 수 있도록 설정
@@ -84,43 +78,12 @@ async function clockIn() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
-  async function getIdPw() {
-    return new Promise((resolve) => {
-      rl.question(
-        "아이디와 비밀번호를 공백을 기준으로 작성해주세요 ex) ididid pwpwpw\n",
-        (input) => {
-          const value = input.split(" ");
-          resolve({ id: value[0], pw: value[1] });
-        }
-      );
-    });
-  }
-
-  function validate(data) {
-    if (data[0].length !== 8) {
-      return false;
-    }
-
-    if (data[1].length !== 4) {
-      return false;
-    }
-
-    if (data[2].length !== 4) {
-      return false;
-    }
-
-    return true;
-  }
-
-  // 회사 포털 페이지로 이동
+  // 대학 포털 페이지로 이동
   await page.goto(
     "https://portal.dongyang.ac.kr/login_real.jsp?targetId=DOUMI&RelayState=https://dtis.dongyang.ac.kr/dtc5/"
   );
 
   await page.setViewport({ width: 1920, height: 1080 });
-
-  const { id, pw } = await getIdPw();
-  console.log("힌트가 출력될 때까지 기다려주세요.");
 
   // 로그인
   await page.waitForSelector("#user_id", { visible: true, timeout: 5000 });
@@ -143,61 +106,33 @@ async function clockIn() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await page.mouse.click(1600, 170, { button: "left" });
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("값을 입력해주세요\n");
-    console.log("ex) 20250101 0900 1200\n");
-    console.log(
-      "입력이 끝나면 아무 값도 입력하지 않은 상태로 Enter를 한 번 더 눌러주세요\n"
-    );
 
-    const arr = [];
+    for (const data of dataList) {
+      const detailText = data.detail || "강의실 준비 및 점검";
+      console.log(
+        `입력중: ${data.date} ${data.start}~${data.end} ${detailText}`
+      );
+      await create();
+      // 날짜 입력
+      await date(data.date); // "20250310"
 
-    rl.on("line", async (input) => {
-      if (!input.trim()) {
-        rl.close();
-        return;
-      }
+      // 시작 시간 입력
+      await start(data.start); // "0900"
 
-      const data = input.split(" ");
-      if (!validate(data)) {
-        console.log("잘못된 값이 입력되었습니다.");
-        return;
-      }
-      const date = data[0];
-      const start = data[1];
-      const end = data[2];
-      const detail = data.slice(3).join(" ").trim();
-      arr.push({ date, start, end, detail });
-    });
+      // 종료 시간 입력
+      await end(data.end); // "1200"
 
-    rl.on("close", async () => {
-      for (const data of arr) {
-        const detailText = data.detail || "강의실 준비 및 점검";
-        console.log(
-          `입력중: ${data.date} ${data.start}~${data.end} ${detailText}`
-        );
-        await create();
-        // 날짜 입력
-        await date(data.date); // "20250310"
+      // 세부 내용 입력
+      await detail(detailText); // "강의실 준비 및 점검"
 
-        // 시작 시간 입력
-        await start(data.start); // "0900"
+      // 저장
+      await save();
+    }
 
-        // 종료 시간 입력
-        await end(data.end); // "1200"
-
-        // 세부 내용 입력
-        await detail(detailText); // "강의실 준비 및 점검"
-
-        // 저장
-        await save();
-      }
-
-      await browser.close();
-    });
+    await browser.close();
   } catch (error) {
     console.error("출근 체크 중 오류 발생:", error);
   }
 }
 
-// 함수 실행
-clockIn();
+module.exports = { clockIn };

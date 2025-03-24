@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 50px;
+  list-style: none;
+}
+
+#top {
+  display: flex;
+}
+
+input,
+button {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#login {
+  flex-basis: 3;
+}
+
+#time_table {
+  flex-basis: 7;
+  padding-bottom: 200px;
+}
+
+inpit[type="text"] {
+  cursor: text;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#submit {
+  position: fixed;
+  bottom: 20px;
+}
+
+li > p {
+  text-align: center;
+  width: 30%;
+}
+
+li > input {
+  cursor: auto;
+  width: 30%;
+}
+
+#time_table_header {
+  display: flex;
+  width: 100%;
+}
+
+#time_table_header > p {
+  text-align: center;
+  width: 25%;
+}
+
+.blank_header {
+  width: 30px;
+}
+
+.copy {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  padding: 0px;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,5 +1,15 @@
 {
+  "name": "auto-mapping",
+  "version": "1.0.0",
+  "main": "main.js",
   "dependencies": {
     "puppeteer": "^24.4.0"
+  },
+  "devDependencies": {
+    "electron": "^35.0.3"
+  },
+  "scripts": {
+    "start": "electron ."
   }
 }
+
