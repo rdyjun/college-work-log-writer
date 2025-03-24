@@ -23,8 +23,7 @@ button {
 
 #time_table {
   flex-basis: 7;
-  padding-bottom: 200px;
-  max-height: 100px;
+  height: 300px;
   overflow: scroll;
 }
 
