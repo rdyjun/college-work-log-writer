@@ -24,6 +24,8 @@ button {
 #time_table {
   flex-basis: 7;
   padding-bottom: 200px;
+  max-height: 100px;
+  overflow: scroll;
 }
 
 inpit[type="text"] {
