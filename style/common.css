@@ -21,6 +21,10 @@ button {
   flex-basis: 3;
 }
 
+#login > input {
+  cursor: text;
+}
+
 #log {
   height: 162px;
   overflow-y: scroll;
