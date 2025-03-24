@@ -49,7 +49,7 @@ function updateTime(event) {
   const minute = current % 60;
   const hour = Math.floor((current - minute) / 60);
 
-  const timeP = parent.querySelector("p");
+  const timeP = parent.querySelector(".time_result");
   timeP.innerText = `${hour}H ${minute}M`;
   if (hour < 0 || minute < 0 || current > 480) {
     timeP.style.color = "red";
@@ -90,7 +90,7 @@ document.getElementById("add_input").addEventListener("click", () => {
               onChange="updateTime(event)"
               placeholder="1200"
             />
-            <p>0H 0M</p>
+            <p class="time_result">0H 0M</p>
             <button class="delete" onClick="deleteInput(event)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
