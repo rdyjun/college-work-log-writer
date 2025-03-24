@@ -114,6 +114,12 @@ li > input {
   color: white;
 }
 
+#time_table > li:nth-of-type(1) .delete {
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: #999;
+}
+
 #blank_delete {
   width: 50px;
   height: 30px;
