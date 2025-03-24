@@ -34,6 +34,7 @@ button {
   flex-basis: 7;
   height: 300px;
   overflow: scroll;
+  padding: 8px;
 }
 
 inpit[type="text"] {
@@ -89,4 +90,21 @@ li > input {
 
 .table_number {
   width: 30px;
+}
+
+.delete {
+  background-color: red;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+#blank_delete {
+  width: 50px;
+  height: 30px;
 }

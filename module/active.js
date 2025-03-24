@@ -9,6 +9,18 @@ function log(text) {
   logElement.appendChild(logEntry);
 }
 
+function deleteInput(e) {
+  const target = e.target;
+  const li = target.closest("li");
+  li.remove();
+  tableNumber--;
+
+  const tableNumbers = document.querySelectorAll(".table_number");
+  tableNumbers.forEach((tableNumber, index) => {
+    tableNumber.innerText = index + 1;
+  });
+}
+
 function updateTime(event) {
   const target = event.target;
   const parent = target.parentElement;
@@ -75,6 +87,17 @@ document.getElementById("add_input").addEventListener("click", () => {
               placeholder="1200"
             />
             <p>0H 0M</p>
+            <button class="delete" onClick="deleteInput(event)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+              >
+                <path d="M2 8a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1z" />
+              </svg>
+            </button>
     `;
 
   document
