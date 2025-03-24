@@ -21,6 +21,11 @@ button {
   flex-basis: 3;
 }
 
+#log {
+  height: 162px;
+  overflow-y: scroll;
+}
+
 #time_table {
   flex-basis: 7;
   height: 300px;
