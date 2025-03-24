@@ -15,6 +15,10 @@ function deleteInput(e) {
   li.remove();
   tableNumber--;
 
+  numberUpdate();
+}
+
+function numberUpdate() {
   const tableNumbers = document.querySelectorAll(".table_number");
   tableNumbers.forEach((tableNumber, index) => {
     tableNumber.innerText = index + 1;
@@ -113,6 +117,7 @@ function copy(e) {
   const copyed = li.cloneNode(true);
 
   ul.insertBefore(copyed, document.getElementById("add_input"));
+  numberUpdate();
 }
 
 document.getElementById("submit").addEventListener("click", async () => {
