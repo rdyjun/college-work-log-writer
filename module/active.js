@@ -1,5 +1,7 @@
 const regex = /^(0[1-9]|1[0-9]|2[0-4])(0[0-9]|[1-5][0-9])$/;
 
+let tableNumber = 2;
+
 function log(text) {
   const logElement = document.getElementById("log");
   const logEntry = document.createElement("div");
@@ -43,6 +45,7 @@ function updateTime(event) {
 document.getElementById("add_input").addEventListener("click", () => {
   const li = document.createElement("li");
   li.innerHTML = `
+              <p class="table_number">${tableNumber++}</p>
               <button class="copy" onClick="copy(event)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

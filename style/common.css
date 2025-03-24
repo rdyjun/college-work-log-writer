@@ -86,3 +86,7 @@ li > input {
   align-items: center;
   justify-content: center;
 }
+
+.table_number {
+  width: 30px;
+}
