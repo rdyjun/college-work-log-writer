@@ -16,8 +16,8 @@ async function clockIn(id, pw, dataList) {
   // 브라우저 시작 (헤드리스 모드)
   const browser = await puppeteer.launch({
     headless: true, // 브라우저 화면을 볼 수 있도록 설정
-    defaultViewport: null,
-    // args: ["--start-maximized"], // 전체화면
+    defaultViewport: { width: 1920, height: 1080 },
+    args: ["--start-maximized"], // 전체화면
   });
 
   const page = await browser.newPage();
@@ -98,14 +98,15 @@ async function clockIn(id, pw, dataList) {
   // 출근 버튼 찾기 및 클릭
   try {
     // 근로 페이지 열기
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     await page.mouse.click(400, 500, { button: "left" });
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     await page.mouse.click(400, 520, { button: "left" });
 
     // 조회 버튼 클릭
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     await page.mouse.click(1600, 170, { button: "left" });
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     for (const data of dataList) {
       const detailText = data.detail || "강의실 준비 및 점검";
